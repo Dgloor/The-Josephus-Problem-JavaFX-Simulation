@@ -7,6 +7,7 @@ import tda.Node;
 /**
  *
  * @author danny
+ * @param <T>
  */
 public class DoublyCircularLinkedList<T> implements List<T> {
 
@@ -26,6 +27,7 @@ public class DoublyCircularLinkedList<T> implements List<T> {
         head.getPrevious().setNext(newNode);
         head.setPrevious(newNode);
         head = newNode;
+        size++;
         return true;
     }
 
@@ -41,17 +43,33 @@ public class DoublyCircularLinkedList<T> implements List<T> {
         newNode.setPrevious(head.getPrevious());
         head.getPrevious().setNext(newNode);
         head.setPrevious(newNode);
+        size++;
         return true;
     }
 
     @Override
     public T removeFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            return null;
+        }
+        T data = head.getContent();
+        head.getPrevious().setNext(head.getNext());
+        head.getNext().setPrevious(head.getPrevious());
+        head = head.getNext();
+        size--;
+        return data;
     }
 
     @Override
     public T removeLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            return null;
+        }
+        T data = head.getPrevious().getContent();
+        head.getPrevious().getPrevious().setNext(head);
+        head.setPrevious(head.getPrevious().getPrevious());
+        size--;
+        return data;
     }
 
     @Override
@@ -66,7 +84,7 @@ public class DoublyCircularLinkedList<T> implements List<T> {
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
@@ -91,7 +109,13 @@ public class DoublyCircularLinkedList<T> implements List<T> {
 
     @Override
     public Iterator iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        return sb.toString();
     }
 
 }

@@ -38,6 +38,7 @@ public interface List<E> {
 
     public Iterator<E> iterator();
     
+    @Override
     public String toString();
     
 }

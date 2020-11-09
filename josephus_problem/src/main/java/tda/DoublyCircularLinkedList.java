@@ -84,7 +84,7 @@ public class DoublyCircularLinkedList<T> implements List<T> {
 
     @Override
     public void clear() {
-
+        head = null;
     }
 
     @Override

@@ -9,17 +9,39 @@ import tda.Node;
  * @author danny
  */
 public class DoublyCircularLinkedList<T> implements List<T> {
+
     Node<T> head;
     int size;
-    
+
     @Override
-    public boolean addFirst(Object e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addFirst(T data) {
+        Node<T> newNode = new Node(data);
+        if (isEmpty()) {
+            head = newNode;
+            head.setNext(newNode);
+            head.setPrevious(newNode);
+        }
+        newNode.setNext(head);
+        newNode.setPrevious(head.getPrevious());
+        head.getPrevious().setNext(newNode);
+        head.setPrevious(newNode);
+        head = newNode;
+        return true;
     }
 
     @Override
-    public boolean addLast(Object e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addLast(T data) {
+        Node<T> newNode = new Node(data);
+        if (isEmpty()) {
+            head = newNode;
+            head.setNext(newNode);
+            head.setPrevious(newNode);
+        }
+        newNode.setNext(head);
+        newNode.setPrevious(head.getPrevious());
+        head.getPrevious().setNext(newNode);
+        head.setPrevious(newNode);
+        return true;
     }
 
     @Override
@@ -39,7 +61,7 @@ public class DoublyCircularLinkedList<T> implements List<T> {
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return size == 0;
     }
 
     @Override
@@ -48,7 +70,7 @@ public class DoublyCircularLinkedList<T> implements List<T> {
     }
 
     @Override
-    public void add(int index, Object element) {
+    public void add(int index, T data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -63,7 +85,7 @@ public class DoublyCircularLinkedList<T> implements List<T> {
     }
 
     @Override
-    public Object set(int index, Object element) {
+    public T set(int index, T data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

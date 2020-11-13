@@ -1,0 +1,29 @@
+{
+    -primary: #191A1B;
+    -green1: #61892F;
+    -green2: #86C232;
+    -white: #E7EAE0;
+    -gray1: #474B4F;
+    -gray2: #6B6E70;
+}
+
+.test {
+    -fx-background-color:  #191A1B;
+}
+
+.textoPrimario {
+    -fx-text-fill:  -white;
+}
+
+.textoSecundario{
+    -fx-text-fill: #48494B;
+}
+
+.botones {
+    -fx-background-color: #161718;
+    -fx-text-fill: -white;
+}
+.botones:hover {
+    -fx-background-color: #79A617;
+    -fx-text-fill: -primary;
+}

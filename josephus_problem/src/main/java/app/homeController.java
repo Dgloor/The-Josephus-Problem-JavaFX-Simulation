@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author danny
  */
-public class HomeScreenController implements Initializable {
+public class homeController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {

@@ -1,8 +1,8 @@
-package tda;
+package list;
 
 import java.util.Iterator;
-import tda.List;
-import tda.Node;
+import list.List;
+import list.Node;
 
 
 /**

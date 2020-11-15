@@ -1,5 +1,6 @@
 package app;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -45,8 +46,8 @@ public class baseController implements Initializable {
         ventana.close();
     }
 
-    public void toogleAudioState() {
+    public void toggleAudioState() {
         audio.switchState();
     }
-
+    
 }

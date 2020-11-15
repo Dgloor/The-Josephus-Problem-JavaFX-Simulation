@@ -13,11 +13,6 @@
     -fx-background-color: #474B4F;
 }
 
-.textoPrimario {
-    -fx-text-fill:  -white;
-}
-
-
 .botones {
     -fx-background-color: #61892F;
 }
@@ -27,9 +22,15 @@
 }
 
 #btnClose:hover {
-    -fx-fill: #ea104a;
+    -fx-fill: #ee003b;
 }
 
 #btnMinimize:hover{
     -fx-fill: #ffa202;
 }
+
+/*.jfx-button {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #61892F;
+    -fx-text-fill: white;
+}*/

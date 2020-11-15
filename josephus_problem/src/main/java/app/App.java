@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * JavaFX App
@@ -18,10 +19,10 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         System.out.println("Iniciando Aplicación...");
         scene = new Scene(loadFXML("base"));
-        stage.setTitle("Josephus Problem Simulation");
         stage.centerOnScreen();
         stage.setScene(scene);
-//        stage.
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
         stage.show();
     }
 

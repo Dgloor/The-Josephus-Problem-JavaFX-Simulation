@@ -1,52 +1,30 @@
 package app;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class baseController implements Initializable {
 
     @FXML
     BorderPane baseScreen;
-    
-    private String currentScreen;
+    @FXML
+    Circle btnClose;
+    @FXML
+    Circle btnMinimize;
 
     AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
     AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentScreen = "base";
-        System.out.println("Pantalla base plantada.");
-        try {
-            setScreen("home");
-        } catch (IOException e) {
-        }
-    }
-
-    /**
-     * @param screenName pantalla a cambiar.
-     * @throws IOException
-     */
-    public void setScreen(String screenName) throws IOException {
-        if (!currentScreen.equals(screenName)) {
-            System.out.println("Cargando pantalla: " + screenName + "...");
-            Parent screen = App.loadFXML(screenName);
-            baseScreen.setLeft(null);
-            baseScreen.setTop(screen);
-            currentScreen = screenName;
-
-        } else {
-            System.out.println("¡" + screenName + " already set!");
-        }
     }
 
     public void handlePressed(MouseEvent e) {
@@ -59,6 +37,20 @@ public class baseController implements Initializable {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.setX(e.getScreenX() + xOffset.get());
         stage.setY(e.getScreenY() + yOffset.get());
+    }
+
+    @FXML
+    public void handleVentanaClicks(MouseEvent event) {
+        Stage stage = ((Stage) ((Circle) event.getSource()).getScene().getWindow());
+
+        if (event.getSource().equals(btnMinimize)) {
+            stage.setIconified(true);
+
+        } else if (event.getSource().equals(btnClose)) {
+            stage.setIconified(true);
+            System.out.println("Programa Finalizado.");
+            System.exit(0);
+        }
     }
 
 }

@@ -7,8 +7,12 @@
     -gray2: #6B6E70;
 }
 
-.test {
+.parent {
     -fx-background-color:  #191A1B;
+}
+
+.bar {
+    -fx-background-color: #474B4F;
 }
 
 .textoPrimario {
@@ -26,4 +30,12 @@
 .botones:hover {
     -fx-background-color: #79A617;
     -fx-text-fill: -primary;
+}
+
+#btnClose:hover {
+    -fx-fill: #ea104a;
+}
+
+#btnMinimize:hover{
+    -fx-fill: #ffa202;
 }

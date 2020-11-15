@@ -2,15 +2,12 @@ package app;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicReference;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 public class baseController implements Initializable {
 
@@ -29,6 +26,7 @@ public class baseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ventana = new Ventana();
+        audio = new Audio();
     }
 
     public void handlePressed(MouseEvent e) {
@@ -47,8 +45,8 @@ public class baseController implements Initializable {
         ventana.close();
     }
 
-    public void switchMusicState() {
-        System.out.println("Music stopped");
+    public void toogleAudioState() {
+        audio.switchState();
     }
 
 }

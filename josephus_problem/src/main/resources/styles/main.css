@@ -7,9 +7,7 @@
     -gray2: #6B6E70;
 }
 
-.parent {
-    -fx-background-color:  #191A1B;
-}
+
 
 .bar {
     -fx-background-color: #474B4F;
@@ -19,17 +17,13 @@
     -fx-text-fill:  -white;
 }
 
-.textoSecundario{
-    -fx-text-fill: #48494B;
-}
 
 .botones {
-    -fx-background-color: #161718;
-    -fx-text-fill: -white;
+    -fx-background-color: #61892F;
 }
+
 .botones:hover {
-    -fx-background-color: #79A617;
-    -fx-text-fill: -primary;
+    -fx-background-color: #86C232;
 }
 
 #btnClose:hover {

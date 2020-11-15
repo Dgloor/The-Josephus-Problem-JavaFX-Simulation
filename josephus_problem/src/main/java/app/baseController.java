@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
@@ -19,38 +20,35 @@ public class baseController implements Initializable {
     Circle btnClose;
     @FXML
     Circle btnMinimize;
+    @FXML
+    Button btnMusic;
 
-    AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
-    AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+    Ventana ventana;
+    Audio audio;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ventana = new Ventana();
     }
 
     public void handlePressed(MouseEvent e) {
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        xOffset.set(stage.getX() - e.getScreenX());
-        yOffset.set(stage.getY() - e.getScreenY());
+        ventana.setPosicion(e);
     }
 
     public void handleDragged(MouseEvent e) {
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        stage.setX(e.getScreenX() + xOffset.get());
-        stage.setY(e.getScreenY() + yOffset.get());
+        ventana.move(e);
     }
 
-    @FXML
-    public void handleVentanaClicks(MouseEvent event) {
-        Stage stage = ((Stage) ((Circle) event.getSource()).getScene().getWindow());
+    public void handleMin(MouseEvent e) {
+        ventana.minimize();
+    }
 
-        if (event.getSource().equals(btnMinimize)) {
-            stage.setIconified(true);
+    public void handleClose(MouseEvent e) {
+        ventana.close();
+    }
 
-        } else if (event.getSource().equals(btnClose)) {
-            stage.setIconified(true);
-            System.out.println("Programa Finalizado.");
-            System.exit(0);
-        }
+    public void switchMusicState() {
+        System.out.println("Music stopped");
     }
 
 }

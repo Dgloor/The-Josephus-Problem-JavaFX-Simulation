@@ -1,9 +1,6 @@
 package list;
 
 import java.util.Iterator;
-import list.List;
-import list.Node;
-
 
 /**
  *
@@ -90,33 +87,93 @@ public class DoublyCircularLinkedList<T> implements List<T> {
 
     @Override
     public void add(int index, T data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (index == 0){
+            addFirst(data);
+        }
+        else if (index > 0 && index < size){
+            Node<T> aux = getNode(index);
+            Node<T> newNode = new Node<>(data);
+            aux.getPrevious().setNext(newNode);
+            newNode.setPrevious(aux.getPrevious());
+            newNode.setNext(aux);
+            aux.setPrevious(newNode);
+            size++;
+        }
     }
 
     @Override
     public T remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        T element = null;
+        if (index == 0){
+            element = removeFirst();
+        }
+        else if (index > 0 && index < size){
+            Node<T> aux = getNode(index);
+            element = aux.getContent();
+            aux.getPrevious().setNext(aux.getNext());
+            aux.getNext().setPrevious(aux.getPrevious());
+            aux.setContent(null);
+            aux.setPrevious(null);
+            aux.setNext(null);
+            size--;
+        }
+        return element;
     }
 
     @Override
     public T get(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        T element = null;
+        if (index >= 0 && index < size){
+            Node<T> aux = getNode(index);
+            element = aux.getContent();
+        }
+        return element;
     }
 
     @Override
     public T set(int index, T data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        T element = null;
+        if (index >= 0 && index < size){
+            Node<T> aux = getNode(index);
+            element = aux.getContent();
+            aux.setContent(data);
+        }
+        return element;
     }
 
+    private Node<T> getNode(int index){
+        Node<T> aux = head;
+        if (index<=size/2){
+            for(; index > 0; index--){
+                aux = aux.getNext();
+            }
+        }
+        else if (index>size/2){
+            index = size - index;
+            for(; index > 0; index--){
+                aux = aux.getPrevious();
+            }
+        }
+        return aux;
+    }
+    
     @Override
-    public Iterator iterator() {
+    public Iterator<T> iterator() {
         return null;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.toString();
+        String text = "[";
+        int counter= 0;
+        for (Node<T> node = head; counter<size; counter++){
+            text+= node.getContent().toString();
+            if(counter != size-1){
+                text+=", ";
+            }
+            node = node.getNext();
+        }
+        return text+"]";
     }
 
 }

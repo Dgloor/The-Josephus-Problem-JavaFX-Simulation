@@ -1,6 +1,5 @@
 package app;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -9,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
+import model.DeathCircle;
 
 public class baseController implements Initializable {
 
@@ -20,7 +20,7 @@ public class baseController implements Initializable {
     Circle btnMinimize;
     @FXML
     Button btnMusic;
-
+    
     Ventana ventana;
     Audio audio;
 
@@ -28,6 +28,8 @@ public class baseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ventana = new Ventana();
         audio = new Audio();
+     
+        
     }
 
     public void handlePressed(MouseEvent e) {
@@ -49,5 +51,9 @@ public class baseController implements Initializable {
     public void toggleAudioState() {
         audio.switchState();
     }
+    
+//    public void startSimulation(){
+//        controls.start();
+//    }
     
 }

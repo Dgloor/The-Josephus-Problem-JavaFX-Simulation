@@ -7,7 +7,7 @@ import java.util.Iterator;
  * @author danny
  * @param <T>
  */
-public class DoublyCircularLinkedList<T> implements List<T> {
+public class CircularDoublyLinkedList<T> implements List<T> {
 
     Node<T> head;
     int size;

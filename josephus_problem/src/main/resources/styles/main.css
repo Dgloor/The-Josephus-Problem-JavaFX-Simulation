@@ -13,13 +13,13 @@
     -fx-background-color: #474B4F;
 }
 
-.botones {
+/*.botones {
     -fx-background-color: #61892F;
 }
 
 .botones:hover {
     -fx-background-color: #86C232;
-}
+}*/
 
 #btnClose:hover {
     -fx-fill: #ee003b;

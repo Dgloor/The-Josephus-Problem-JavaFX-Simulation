@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package list;
 
-import java.util.Iterator;
+import java.util.ListIterator;
 
 /**
  *
@@ -36,7 +31,7 @@ public interface List<E> {
 
     public E set(int index, E element); 
 
-    public Iterator<E> iterator();
+    public ListIterator<E> listIterator();
     
     @Override
     public String toString();

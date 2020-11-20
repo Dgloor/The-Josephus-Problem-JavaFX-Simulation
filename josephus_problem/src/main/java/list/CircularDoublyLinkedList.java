@@ -1,6 +1,6 @@
 package list;
 
-import java.util.Iterator;
+import java.util.ListIterator;
 
 /**
  *
@@ -158,8 +158,76 @@ public class CircularDoublyLinkedList<T> implements List<T> {
     }
     
     @Override
-    public Iterator<T> iterator() {
-        return null;
+    public ListIterator<T> listIterator() {
+        ListIterator<T> it = new ListIterator<>(){
+            private int index = 0;
+            private Node<T> traveler = head;
+            
+            @Override
+            public boolean hasNext() {
+                return traveler.getNext() != head;
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext()){
+                    return null;
+                }                
+                if (index < 0){
+                    traveler = getNode(size + index);
+                    return get(size + index++);
+                }
+                traveler = getNode(index);
+                return get(index++);
+//                traveler = getNode(index);
+//                return get(index++);
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return traveler.getPrevious() != head;
+            }
+
+            @Override
+            public T previous() {
+                if (!hasPrevious()){
+                    return null;
+                }
+                if (index < 0){
+                    traveler = getNode(size + index);
+                    return get(size + index--);
+                }
+                traveler = getNode(index);
+                return get(index--);
+            }
+
+            @Override
+            public int nextIndex() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int previousIndex() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void set(T e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void add(T e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+            
+        };
+        return it;
     }
 
     @Override

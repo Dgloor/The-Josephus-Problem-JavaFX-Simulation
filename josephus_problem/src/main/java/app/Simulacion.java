@@ -1,15 +1,8 @@
 package app;
 
-import Observer.Observer;
-import java.io.File;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import list.CircularDoublyLinkedList;
 import model.Soldier;
@@ -18,15 +11,21 @@ import model.Soldier;
  *
  * @author danny
  */
-public class Simulacion implements Observer{
+public class Simulacion{
     @FXML
     AnchorPane circleSpace;
-    CircularDoublyLinkedList<Soldier> deathCircle;
+    
+    private CircularDoublyLinkedList<Soldier> deathCircle;
     private final int defaultSize = 20;
+    private SimulationState state;
+   
 
     public Simulacion(AnchorPane circleSpace) {
         deathCircle = new CircularDoublyLinkedList();
         this.circleSpace = circleSpace;
+        
+        this.state = SimulationState.STOPPED;
+        
         for (int i = 0; i < defaultSize; i++) {
             deathCircle.addLast(new Soldier());
             Circle c = new Circle(20);
@@ -43,10 +42,16 @@ public class Simulacion implements Observer{
         deathCircle.addLast(new Soldier());
     }
     
-    
-    
-    @Override
-    public void update(String msg) {
-        System.out.println("Desde simulacion" + msg);
+    public void startSimulation(){
+        this.state = SimulationState.RUNNING;
     }
+    
+    public void pauseSimulation(){
+        this.state = SimulationState.PAUSED;
+    }
+    
+    public void stopSimulation() {
+        this.state = SimulationState.STOPPED;
+    }
+    
 }

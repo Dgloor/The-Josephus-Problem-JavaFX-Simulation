@@ -1,46 +1,102 @@
 package app;
 
-import Observer.Observer;
-import Observer.Subject;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 
 /**
  *
  * @author danny
  */
-public class Controles implements Subject {
+public class Controles {
 
+    @FXML
     private ToggleGroup sentido;
+    @FXML
     private JFXSlider amountSlider;
+    @FXML
     private Spinner<Integer> startIndex;
+    @FXML
     private SpinnerValueFactory<Integer> valueFactory;
-    private Button btnStart, btnStop, btnReset;
-    
-    Observer observer;
+    @FXML
+    private Button btnStart, btnPause, btnStop, btnReset;
+
+    Simulacion observer;
 
     public void start() {
-        System.out.println("Start");
-        notifyObserver();
+        observer.startSimulation();
+
+        btnStart.setVisible(false);
+        btnStart.setDisable(true);
+
+        btnPause.setVisible(true);
+        btnPause.setDisable(false);
+
+        btnReset.setDisable(true);
+        btnStop.setDisable(false);
+
+        startIndex.setDisable(true);
+        amountSlider.setDisable(true);
+        sentido.getToggles().stream().map((t)
+                -> (ToggleButton) t).forEach((btn)
+                -> {
+            btn.setDisable(true);
+        });
     }
 
     public void pause() {
-        System.out.println("Pause");
+        observer.pauseSimulation();
+
+        btnStart.setText("RESUME");
+        btnStart.setVisible(true);
+        btnStart.setDisable(false);
+
+        btnPause.setVisible(false);
+        btnPause.setDisable(true);
     }
 
     public void stop() {
-        System.out.println("Stop");
+        observer.stopSimulation();
+
+        btnStart.setText("START");
+        btnStart.setVisible(true);
+        btnStart.setDisable(false);
+
+        btnPause.setVisible(false);
+        btnPause.setDisable(true);
+
+        btnReset.setDisable(false);
+        btnStop.setDisable(true);
+
+        startIndex.setDisable(false);
+        amountSlider.setDisable(false);
+
+        sentido.getToggles().stream().map((t)
+                -> (ToggleButton) t).forEach((btn)
+                -> {
+            btn.setDisable(false);
+        });
     }
 
     public void reset() {
-        System.out.println("Reset");
+        this.btnStart.setText("START");
+
+        btnStart.setVisible(true);
+        btnStart.setDisable(false);
+
+        btnPause.setVisible(false);
+        btnPause.setDisable(true);
+
+        btnStop.setDisable(true);
     }
 
     public void incrementAmount() {
-            
+
     }
 
     public void changeStartIndex() {
@@ -56,12 +112,16 @@ public class Controles implements Subject {
 
     public void setStartIndex(Spinner<Integer> startIndex) {
         this.startIndex = startIndex;
-         valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 60, 1);
+        valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 60, 1);
         startIndex.setValueFactory(valueFactory);
     }
 
     public void setBtnStart(Button btnStart) {
         this.btnStart = btnStart;
+    }
+
+    public void setBtnPause(Button btnPause) {
+        this.btnPause = btnPause;
     }
 
     public void setBtnStop(Button btnStop) {
@@ -71,16 +131,9 @@ public class Controles implements Subject {
     public void setBtnReset(Button btnReset) {
         this.btnReset = btnReset;
     }
-    
-    public void setObserver(Observer observer){
+
+    public void setObserver(Simulacion observer) {
         this.observer = observer;
     }
-
-    @Override
-    public void notifyObserver() {
-        observer.update("Este es un mensaje de prueba");
-    }
-    
-    
 
 }

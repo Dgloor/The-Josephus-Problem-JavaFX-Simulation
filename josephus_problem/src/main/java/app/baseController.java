@@ -40,7 +40,9 @@ public class baseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ventana = new Ventana();
         audio = new Audio();
+        simulacion = new Simulacion(circleSpace);
         addControls();
+//        circleSpace = simulacion.test();
     }
 
     public void addControls() {
@@ -51,6 +53,8 @@ public class baseController implements Initializable {
         controles.setBtnStart(btnStart);
         controles.setBtnStop(btnStop);
         controles.setBtnReset(btnReset);
+        
+        controles.setObserver(simulacion);
     }
 
     @FXML

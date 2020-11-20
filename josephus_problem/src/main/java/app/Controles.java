@@ -1,5 +1,7 @@
 package app;
 
+import Observer.Observer;
+import Observer.Subject;
 import com.jfoenix.controls.JFXSlider;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
@@ -10,16 +12,19 @@ import javafx.scene.control.ToggleGroup;
  *
  * @author danny
  */
-public class Controles {
+public class Controles implements Subject {
 
     private ToggleGroup sentido;
     private JFXSlider amountSlider;
     private Spinner<Integer> startIndex;
     private SpinnerValueFactory<Integer> valueFactory;
     private Button btnStart, btnStop, btnReset;
+    
+    Observer observer;
 
     public void start() {
         System.out.println("Start");
+        notifyObserver();
     }
 
     public void pause() {
@@ -35,7 +40,7 @@ public class Controles {
     }
 
     public void incrementAmount() {
-
+            
     }
 
     public void changeStartIndex() {
@@ -65,6 +70,15 @@ public class Controles {
 
     public void setBtnReset(Button btnReset) {
         this.btnReset = btnReset;
+    }
+    
+    public void setObserver(Observer observer){
+        this.observer = observer;
+    }
+
+    @Override
+    public void notifyObserver() {
+        observer.update("Este es un mensaje de prueba");
     }
     
     

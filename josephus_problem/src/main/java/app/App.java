@@ -15,6 +15,11 @@ public class App extends Application {
 
     private static Scene scene;
 
+    /**
+     *
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         System.out.println("Iniciando Aplicación...");

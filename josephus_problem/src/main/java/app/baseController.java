@@ -1,6 +1,5 @@
 package app;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +14,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 
 public class baseController implements Initializable {
-
+    Ventana ventana;
+    Audio audio;
+    Controles controles;
+    Simulacion simulacion;
+    
     @FXML
     BorderPane baseScreen;
     @FXML
@@ -24,18 +27,13 @@ public class baseController implements Initializable {
     Button btnStart, btnPause, btnStop, btnReset, btnMusic;
     @FXML
     AnchorPane circleSpace;
-
     @FXML
-    ToggleGroup sentido;
+    ToggleGroup toggleSentido;
+
     @FXML
     JFXSlider amountSlider;
     @FXML
     Spinner<Integer> startIndex;
-
-    Ventana ventana;
-    Audio audio;
-    Controles controles;
-    Simulacion simulacion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -47,15 +45,15 @@ public class baseController implements Initializable {
 
     public void addControls() {
         controles = new Controles();
+        controles.setObserver(simulacion);
+        
         controles.setAmountSlider(amountSlider);
-        controles.setSentido(sentido);
+        controles.setToggleSentido(toggleSentido);
         controles.setStartIndex(startIndex);
         controles.setBtnStart(btnStart);
         controles.setBtnPause(btnPause);
         controles.setBtnStop(btnStop);
         controles.setBtnReset(btnReset);
-        
-        controles.setObserver(simulacion);
     }
 
     @FXML

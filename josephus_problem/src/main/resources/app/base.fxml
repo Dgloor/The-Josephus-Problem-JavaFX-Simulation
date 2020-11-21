@@ -99,10 +99,10 @@
                                     <Font size="16.0" />
                                  </font>
                                  <toggleGroup>
-                                    <ToggleGroup fx:id="sentido" />
+                                    <ToggleGroup fx:id="toggleSentido" />
                                  </toggleGroup>
                               </JFXRadioButton>
-                              <JFXRadioButton contentDisplay="CENTER" prefHeight="26.0" prefWidth="129.0" style="-fx-text-fill: #E7EAE0;" text="antihorario" toggleGroup="$sentido">
+                              <JFXRadioButton contentDisplay="CENTER" prefHeight="26.0" prefWidth="129.0" style="-fx-text-fill: #E7EAE0;" text="antihorario" toggleGroup="$toggleSentido">
                                  <font>
                                     <Font size="16.0" />
                                  </font>

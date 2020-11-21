@@ -3,6 +3,7 @@ package list;
 /**
  *
  * @author danny
+ * @param <T>
  */
 public class Node<T> {
 

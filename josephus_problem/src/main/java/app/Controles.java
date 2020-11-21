@@ -1,7 +1,8 @@
 package app;
 
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
@@ -16,7 +17,7 @@ import javafx.scene.control.ToggleGroup;
 public class Controles {
 
     @FXML
-    private ToggleGroup sentido;
+    private ToggleGroup toggleSentido;
     @FXML
     private JFXSlider amountSlider;
     @FXML
@@ -42,7 +43,7 @@ public class Controles {
 
         startIndex.setDisable(true);
         amountSlider.setDisable(true);
-        sentido.getToggles().stream().map((t)
+        toggleSentido.getToggles().stream().map((t)
                 -> (ToggleButton) t).forEach((btn)
                 -> {
             btn.setDisable(true);
@@ -76,7 +77,7 @@ public class Controles {
         startIndex.setDisable(false);
         amountSlider.setDisable(false);
 
-        sentido.getToggles().stream().map((t)
+        toggleSentido.getToggles().stream().map((t)
                 -> (ToggleButton) t).forEach((btn)
                 -> {
             btn.setDisable(false);
@@ -95,25 +96,35 @@ public class Controles {
         btnStop.setDisable(true);
     }
 
-    public void incrementAmount() {
+    public void updateAmount() {
+        System.out.println((int) this.amountSlider.getValue());
+    }
+
+    public void updateStartIndex() {
+    }
+
+    public void updateSentido() {
 
     }
 
-    public void changeStartIndex() {
-    }
-
-    public void setSentido(ToggleGroup sentido) {
-        this.sentido = sentido;
+    public void setToggleSentido(ToggleGroup toggleSentido) {
+        this.toggleSentido = toggleSentido;
     }
 
     public void setAmountSlider(JFXSlider amountSlider) {
         this.amountSlider = amountSlider;
+        this.amountSlider.valueProperty().addListener((ObservableValue<? 
+                extends Number> arg0, Number arg1, Number arg2) 
+                -> {
+            updateAmount();
+        });
     }
 
     public void setStartIndex(Spinner<Integer> startIndex) {
         this.startIndex = startIndex;
-        valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 60, 1);
-        startIndex.setValueFactory(valueFactory);
+        valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                1, observer.defaultSize);
+        this.startIndex.setValueFactory(valueFactory);
     }
 
     public void setBtnStart(Button btnStart) {
@@ -126,6 +137,7 @@ public class Controles {
 
     public void setBtnStop(Button btnStop) {
         this.btnStop = btnStop;
+        this.btnStop.setDisable(true);
     }
 
     public void setBtnReset(Button btnReset) {

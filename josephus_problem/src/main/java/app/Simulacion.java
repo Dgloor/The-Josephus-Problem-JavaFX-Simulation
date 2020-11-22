@@ -9,37 +9,43 @@ import model.Soldier;
  *
  * @author danny
  */
-public class Simulacion{
+public class Simulacion {
+
     @FXML
     AnchorPane circleSpace;
-    
+
     private final CircularDoublyLinkedList<Soldier> deathCircle;
     public final int defaultSize = 20;
     private SimulationState state;
-   
 
     public Simulacion(AnchorPane circleSpace) {
         deathCircle = new CircularDoublyLinkedList();
         this.circleSpace = circleSpace;
         this.state = SimulationState.STOPPED;
     }
-    
-    
-    public void addSoldier(){
-        // creo nodo para interfaz grafica
+
+    public void addSoldier() {
         deathCircle.addLast(new Soldier());
     }
-    
-    public void startSimulation(){
+
+    public void removeSoldier() {
+        deathCircle.removeLast();
+    }
+
+    public void startSimulation() {
         this.state = SimulationState.RUNNING;
     }
-    
-    public void pauseSimulation(){
+
+    public void pauseSimulation() {
         this.state = SimulationState.PAUSED;
     }
-    
+
     public void stopSimulation() {
         this.state = SimulationState.STOPPED;
     }
-    
+
+    public void updateSoldiersAmount(Integer n) {
+        // calcular diferencia y llamar a add o remove
+    }
+
 }

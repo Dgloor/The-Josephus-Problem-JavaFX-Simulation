@@ -1,7 +1,6 @@
 package app;
 
 import com.jfoenix.controls.JFXSlider;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +8,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.shape.Circle;
 
 /**
  *
@@ -97,7 +97,7 @@ public class Controles {
     }
 
     public void updateAmount() {
-        System.out.println((int) this.amountSlider.getValue());
+        observer.updateSoldiersAmount((int) amountSlider.getValue());
     }
 
     public void updateStartIndex() {
@@ -113,8 +113,9 @@ public class Controles {
 
     public void setAmountSlider(JFXSlider amountSlider) {
         this.amountSlider = amountSlider;
-        this.amountSlider.valueProperty().addListener((ObservableValue<? 
-                extends Number> arg0, Number arg1, Number arg2) 
+        this.amountSlider.valueProperty().addListener((
+                ObservableValue<? extends Number> arg0,
+                Number arg1, Number arg2)
                 -> {
             updateAmount();
         });

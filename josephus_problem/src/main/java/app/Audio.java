@@ -15,7 +15,7 @@ public class Audio {
     private final MediaPlayer mediaPlayer;
 
     public Audio() {
-        String path = new File("src/main/resources/sound/music.mp3").getAbsolutePath();
+        String path = new File("src/main/resources/sound/bounce.mp3").getAbsolutePath();
         Media media = new Media(new File(path).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);

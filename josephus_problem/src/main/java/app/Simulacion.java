@@ -45,7 +45,14 @@ public class Simulacion {
     }
 
     public void updateSoldiersAmount(Integer n) {
-        // calcular diferencia y llamar a add o remove
+        int diff = n - deathCircle.size();
+        for (int i = 0; i < Math.abs(diff); i++){
+            if (diff > 0){
+                addSoldier();
+            }
+            else {
+                removeSoldier();
+            }
+        }
     }
-
 }

@@ -1,9 +1,11 @@
 package app;
 
+import java.io.File;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
 import javafx.scene.shape.Circle;
 import list.CircularDoublyLinkedList;
 import model.Soldier;
@@ -30,16 +32,17 @@ public class Simulacion {
 
         //circleSpace.getChildren().add(img);
         for (int i = 0; i < defaultSize; i++) {
-            //ImageView img = new ImageView("/recursos/soldado.png");
+            String path = new File("src/main/resources/image/soldado.png").getAbsolutePath();
+            ImageView img = new ImageView(path);
             Circle cr = new Circle(20);
             double angle = (((double) i) / defaultSize) * 2 * Math.PI;
             double xpos = radio * Math.cos(angle) + 300;
             double ypos = radio * Math.sin(angle) + 320;
-            cr.setLayoutX(xpos);
-            cr.setLayoutY(ypos);
-            //img.setFitHeight(50);
-            //img.setFitWidth(50);
-            circleSpace.getChildren().add(cr);
+            img.setLayoutX(xpos);
+            img.setLayoutY(ypos);
+            img.setFitHeight(50);
+            img.setFitWidth(50);
+            circleSpace.getChildren().add(img);
         }
     }
 

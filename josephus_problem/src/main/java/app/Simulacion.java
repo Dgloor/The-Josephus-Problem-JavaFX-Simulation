@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.shape.Circle;
 import list.CircularDoublyLinkedList;
 import model.Soldier;
 
@@ -28,21 +26,18 @@ public class Simulacion {
         deathCircle = new CircularDoublyLinkedList();
         this.circleSpace = circleSpace;
         this.state = SimulationState.STOPPED;
-        //img = new ImageView(new Image("src/main/resources/icons/soldado.png"));
+        Image img = new Image(App.class.getResourceAsStream(
+                "/images/soldado.png"
+        ), 50, 50, true, true);
 
-        //circleSpace.getChildren().add(img);
         for (int i = 0; i < defaultSize; i++) {
-            String path = new File("src/main/resources/image/soldado.png").getAbsolutePath();
-            ImageView img = new ImageView(new Image(path));
-            Circle cr = new Circle(20);
             double angle = (((double) i) / defaultSize) * 2 * Math.PI;
             double xpos = radio * Math.cos(angle) + 300;
             double ypos = radio * Math.sin(angle) + 320;
-            img.setLayoutX(xpos);
-            img.setLayoutY(ypos);
-            img.setFitHeight(50);
-            img.setFitWidth(50);
-            circleSpace.getChildren().add(img);
+            ImageView soldierImg = new ImageView(img);
+            soldierImg.setLayoutX(xpos);
+            soldierImg.setLayoutY(ypos);
+            circleSpace.getChildren().add(soldierImg);
         }
     }
 

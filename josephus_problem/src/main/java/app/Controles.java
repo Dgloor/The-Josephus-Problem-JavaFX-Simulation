@@ -23,11 +23,13 @@ public class Controles {
     @FXML
     private Spinner<Integer> startIndex;
     @FXML
-    private SpinnerValueFactory<Integer> valueFactory;
+    private  SpinnerValueFactory<Integer> valueFactory;
     @FXML
     private Button btnStart, btnPause, btnStop, btnReset;
 
     Simulacion observer;
+
+    final Integer defaultSliderAmount = 20;
 
     public void start() {
         observer.startSimulation();
@@ -94,6 +96,10 @@ public class Controles {
         btnPause.setDisable(true);
 
         btnStop.setDisable(true);
+
+        amountSlider.setValue(defaultSliderAmount);
+        toggleSentido.getToggles().get(0).setSelected(true);
+        toggleSentido.getToggles().get(1).setSelected(false);
     }
 
     public void updateAmount() {
@@ -124,7 +130,7 @@ public class Controles {
     public void setStartIndex(Spinner<Integer> startIndex) {
         this.startIndex = startIndex;
         valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                1, observer.defaultSize);
+                1, defaultSliderAmount);
         this.startIndex.setValueFactory(valueFactory);
     }
 

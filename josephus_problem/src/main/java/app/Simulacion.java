@@ -1,8 +1,10 @@
 package app;
 
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import list.CircularDoublyLinkedList;
 import model.Soldier;
 
@@ -14,7 +16,7 @@ public class Simulacion {
 
     @FXML
     AnchorPane circleSpace;
-    private ImageView img;
+    private int radio = 120;
 
     private final CircularDoublyLinkedList<Soldier> deathCircle;
     public final int defaultSize = 20;
@@ -24,8 +26,21 @@ public class Simulacion {
         deathCircle = new CircularDoublyLinkedList();
         this.circleSpace = circleSpace;
         this.state = SimulationState.STOPPED;
-        //img = new ImageView("/resources/icons/soldado.png");
+        //img = new ImageView(new Image("src/main/resources/icons/soldado.png"));
+
         //circleSpace.getChildren().add(img);
+        for (int i = 0; i < defaultSize; i++) {
+            ImageView img = new ImageView("/recursos/soldado.png");
+            Circle cr = new Circle(20);
+            double angle = (((double) i) / defaultSize) * 2 * Math.PI;
+            double xpos = radio * Math.cos(angle) + 300;
+            double ypos = radio * Math.sin(angle) + 320;
+            img.setLayoutX(xpos);
+            img.setLayoutY(ypos);
+            img.setFitHeight(50);
+            img.setFitWidth(50);
+            circleSpace.getChildren().add(img);
+        }
     }
 
     public void addSoldier() {
@@ -50,11 +65,10 @@ public class Simulacion {
 
     public void updateSoldiersAmount(Integer n) {
         int diff = n - deathCircle.size();
-        for (int i = 0; i < Math.abs(diff); i++){
-            if (diff > 0){
+        for (int i = 0; i < Math.abs(diff); i++) {
+            if (diff > 0) {
                 addSoldier();
-            }
-            else {
+            } else {
                 removeSoldier();
             }
         }

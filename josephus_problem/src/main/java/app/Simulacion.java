@@ -30,16 +30,16 @@ public class Simulacion {
 
         //circleSpace.getChildren().add(img);
         for (int i = 0; i < defaultSize; i++) {
-            ImageView img = new ImageView("/recursos/soldado.png");
+            //ImageView img = new ImageView("/recursos/soldado.png");
             Circle cr = new Circle(20);
             double angle = (((double) i) / defaultSize) * 2 * Math.PI;
             double xpos = radio * Math.cos(angle) + 300;
             double ypos = radio * Math.sin(angle) + 320;
-            img.setLayoutX(xpos);
-            img.setLayoutY(ypos);
-            img.setFitHeight(50);
-            img.setFitWidth(50);
-            circleSpace.getChildren().add(img);
+            cr.setLayoutX(xpos);
+            cr.setLayoutY(ypos);
+            //img.setFitHeight(50);
+            //img.setFitWidth(50);
+            circleSpace.getChildren().add(cr);
         }
     }
 

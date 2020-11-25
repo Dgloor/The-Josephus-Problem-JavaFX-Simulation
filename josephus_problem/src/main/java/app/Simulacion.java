@@ -2,9 +2,11 @@ package app;
 
 import java.io.File;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import list.CircularDoublyLinkedList;
 import model.Soldier;
 
@@ -16,11 +18,12 @@ public class Simulacion {
 
     @FXML
     AnchorPane circleSpace;
-    private int radio = 120;
+    private int radio = 200;
 
     private final CircularDoublyLinkedList<Soldier> deathCircle;
     public final int defaultSize = 20;
     private SimulationState state;
+    private int contadorSoldierhead = 1;
 
     public Simulacion(AnchorPane circleSpace) {
         deathCircle = new CircularDoublyLinkedList();
@@ -31,14 +34,22 @@ public class Simulacion {
         ), 50, 50, true, true);
 
         for (int i = 0; i < defaultSize; i++) {
+            deathCircle.addLast(new Soldier());
             double angle = (((double) i) / defaultSize) * 2 * Math.PI;
             double xpos = radio * Math.cos(angle) + 300;
-            double ypos = radio * Math.sin(angle) + 320;
-            ImageView soldierImg = new ImageView(img);
-            soldierImg.setLayoutX(xpos);
-            soldierImg.setLayoutY(ypos);
-            circleSpace.getChildren().add(soldierImg);
+            double ypos = radio * Math.sin(angle) + 240;
+            circleSpace.getChildren().add(MakeBox(img, xpos, ypos));
+            contadorSoldierhead++;
         }
+    }
+    public VBox MakeBox(Image img, double xpos,double ypos) {
+        ImageView soldierImg = new ImageView(img);
+        Label lblHead = new Label("" + contadorSoldierhead);
+        VBox vbSoldier = new VBox();
+        vbSoldier.setLayoutX(xpos);
+        vbSoldier.setLayoutY(ypos);
+        vbSoldier.getChildren().addAll(lblHead, soldierImg);
+        return vbSoldier;
     }
 
     public void addSoldier() {

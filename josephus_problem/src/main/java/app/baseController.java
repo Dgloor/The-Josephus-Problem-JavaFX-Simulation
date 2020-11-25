@@ -46,7 +46,6 @@ public class baseController implements Initializable {
     public void addControls() {
         controles = new Controles();
         controles.setObserver(simulacion);
-        
         controles.setAmountSlider(amountSlider);
         controles.setToggleSentido(toggleSentido);
         controles.setStartIndex(startIndex);

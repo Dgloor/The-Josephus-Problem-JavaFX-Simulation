@@ -33,7 +33,7 @@ public class Simulacion {
         //circleSpace.getChildren().add(img);
         for (int i = 0; i < defaultSize; i++) {
             String path = new File("src/main/resources/image/soldado.png").getAbsolutePath();
-            ImageView img = new ImageView(path);
+            ImageView img = new ImageView(new Image(path));
             Circle cr = new Circle(20);
             double angle = (((double) i) / defaultSize) * 2 * Math.PI;
             double xpos = radio * Math.cos(angle) + 300;

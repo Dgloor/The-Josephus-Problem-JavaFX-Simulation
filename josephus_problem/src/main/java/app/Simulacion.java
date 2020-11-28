@@ -22,25 +22,23 @@ public class Simulacion {
     private int radio = 200;
     Image img = new Image(App.class.getResourceAsStream("/images/soldado.png"), 50, 50, true, true);
     private final CircularDoublyLinkedList<Soldier> deathCircle;
-    public final int defaultSize = 20;
+    public final int defaultSize = 30;
     private SimulationState state;
-    private int contadorSoldierhead = 1;
-
+    
+    
     public Simulacion(AnchorPane circleSpace) {
         deathCircle = new CircularDoublyLinkedList();
         this.circleSpace = circleSpace;
         this.state = SimulationState.STOPPED;
         for (int i = 0; i < defaultSize; i++) {
-            deathCircle.addLast(new Soldier());
-            circleSpace.getChildren().add(MakeBox(img, 300, 240));
-            contadorSoldierhead++;
+            addSoldier();
         }
         SetLayout();
     }
 
     public VBox MakeBox(Image img, double xpos, double ypos) {
         ImageView soldierImg = new ImageView(img);
-        Label lblHead = new Label("" + contadorSoldierhead);
+        Label lblHead = new Label("" +deathCircle.size()+1 );
         VBox vbSoldier = new VBox();
         vbSoldier.setLayoutX(xpos);
         vbSoldier.setLayoutY(ypos);
@@ -49,7 +47,7 @@ public class Simulacion {
     }
 
     public void SetLayout() {
-        for (int i = 0; i < defaultSize; i++) {
+        for (int i = 0; i < deathCircle.size(); i++) {
             System.out.println("hagoe sto");
             double angle = (((double) i) / defaultSize) * 2 * Math.PI;
             double xpos = radio * Math.cos(angle) + 300;
@@ -60,16 +58,14 @@ public class Simulacion {
 
     }
 
-    public void addSoldier(Image img) {
+    public void addSoldier() {
         deathCircle.addLast(new Soldier());
-        Platform.runLater(()->circleSpace.getChildren().add(MakeBox(img, 300, 240)));
-        contadorSoldierhead++;
+        circleSpace.getChildren().add(MakeBox(img, 300, 240));
     }
 
     public void removeSoldier() {
         deathCircle.removeLast();
-        circleSpace.getChildren().remove(contadorSoldierhead - 1);
-        contadorSoldierhead--;
+        circleSpace.getChildren().remove(deathCircle.size() - 1);
     }
 
     public void startSimulation() {
@@ -86,16 +82,16 @@ public class Simulacion {
 
     public void updateSoldiersAmount(Integer n) {
         int diff = n - deathCircle.size();
-        System.out.println(contadorSoldierhead);
+        System.out.println(deathCircle);
         for (int i = 0; i < Math.abs(diff); i++) {
             System.out.println("entro aqui");
             if (diff > 0) {
-                addSoldier(img);
+                addSoldier();
             } else {
                 removeSoldier();
             }
+            SetLayout();
         }
         System.out.println("rnlaetr");
-        SetLayout();
     }
 }

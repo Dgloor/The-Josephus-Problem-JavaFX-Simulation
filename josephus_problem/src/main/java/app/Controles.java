@@ -1,14 +1,12 @@
 package app;
 
 import com.jfoenix.controls.JFXSlider;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.shape.Circle;
 
 /**
  *
@@ -23,7 +21,7 @@ public class Controles {
     @FXML
     private Spinner<Integer> startIndex;
     @FXML
-    private  SpinnerValueFactory<Integer> valueFactory;
+    private SpinnerValueFactory<Integer> valueFactory;
     @FXML
     private Button btnStart, btnPause, btnStop, btnReset;
 
@@ -119,12 +117,7 @@ public class Controles {
 
     public void setAmountSlider(JFXSlider amountSlider) {
         this.amountSlider = amountSlider;
-        this.amountSlider.valueProperty().addListener((
-                ObservableValue<? extends Number> arg0,
-                Number arg1, Number arg2)
-                -> {
-            updateAmount();
-        });
+        this.amountSlider.setOnMouseReleased(e -> updateAmount());
     }
 
     public void setStartIndex(Spinner<Integer> startIndex) {

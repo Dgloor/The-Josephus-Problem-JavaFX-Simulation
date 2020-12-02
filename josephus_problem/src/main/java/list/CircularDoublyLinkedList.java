@@ -160,45 +160,28 @@ public class CircularDoublyLinkedList<T> implements List<T> {
     @Override
     public ListIterator<T> listIterator() {
         ListIterator<T> it = new ListIterator<>(){
-            private int index = 0;
             private Node<T> traveler = head;
             
             @Override
             public boolean hasNext() {
-                return traveler.getNext() != head;
+                return size > 0;
             }
 
             @Override
             public T next() {
-                if (!hasNext()){
-                    return null;
-                }                
-                if (index < 0){
-                    traveler = getNode(size + index);
-                    return get(size + index++);
-                }
-                traveler = getNode(index);
-                return get(index++);
-//                traveler = getNode(index);
-//                return get(index++);
+                traveler = traveler.getNext();
+                return traveler.getPrevious().getContent();
             }
 
             @Override
             public boolean hasPrevious() {
-                return traveler.getPrevious() != head;
+                return hasNext();
             }
 
             @Override
             public T previous() {
-                if (!hasPrevious()){
-                    return null;
-                }
-                if (index < 0){
-                    traveler = getNode(size + index);
-                    return get(size + index--);
-                }
-                traveler = getNode(index);
-                return get(index--);
+                traveler = traveler.getPrevious();
+                return traveler.getNext().getContent();
             }
 
             @Override

@@ -17,7 +17,7 @@ public class baseController implements Initializable {
     Ventana ventana;
     Audio audio;
     Controles controles;
-    Simulacion simulacion;
+    static Simulacion simulacion;
     
     @FXML
     BorderPane baseScreen;

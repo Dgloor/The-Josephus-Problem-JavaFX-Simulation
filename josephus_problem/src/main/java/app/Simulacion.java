@@ -23,7 +23,7 @@ public class Simulacion {
     Image img;
     private final CircularDoublyLinkedList<Soldier> deathCircle;
     public final int defaultSize = 20;
-    private SimulationState state;
+    public SimulationState state;
 
     public Simulacion(AnchorPane circleSpace) {
         this.circleSpace = circleSpace;
@@ -70,6 +70,8 @@ public class Simulacion {
 
     public void startSimulation() {
         this.state = SimulationState.RUNNING;
+        Thread matanza = new Thread(new Matanza(1, true, deathCircle));
+        matanza.start();
     }
 
     public void pauseSimulation() {

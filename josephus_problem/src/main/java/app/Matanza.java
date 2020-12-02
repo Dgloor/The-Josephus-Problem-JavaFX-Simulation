@@ -8,13 +8,13 @@ import list.CircularDoublyLinkedList;
 import model.Soldier;
 
 public class Matanza implements Runnable{
-    private static int startIndex;
+    private final int startIndex;
     private final boolean horario;
     private final CircularDoublyLinkedList<Soldier> deathCircle;
     private final ObservableList<Node> imgs = baseController.simulacion.circleSpace.getChildren();
 
     public Matanza(int startIndex, boolean horario, CircularDoublyLinkedList<Soldier> deathCircle) {
-        Matanza.startIndex = startIndex-1;
+        this.startIndex = startIndex-1;
         this.horario = horario;
         this.deathCircle = deathCircle;
     }

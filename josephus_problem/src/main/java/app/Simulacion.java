@@ -1,11 +1,14 @@
 package app;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import list.CircularDoublyLinkedList;
 import model.Soldier;
 
@@ -18,6 +21,7 @@ public class Simulacion {
     @FXML
     AnchorPane circleSpace;
     private final int radio = 230;
+    private final int radioLbl = 40;
     private final Image img;
     private final CircularDoublyLinkedList<Soldier> deathCircle;
     private final int defaultSize = 20;
@@ -37,24 +41,31 @@ public class Simulacion {
         last = 1;
     }
 
-    public VBox makeBox(Image img, double xpos, double ypos) {
+    public AnchorPane makeBox(Image img, double xpos, double ypos) {
         ImageView soldierImg = new ImageView(img);
         Label lblHead = new Label("" + deathCircle.size());
         lblHead.setStyle("-fx-text-fill: white;");
-        VBox vbSoldier = new VBox();
-        vbSoldier.setLayoutX(xpos);
-        vbSoldier.setLayoutY(ypos);
-        vbSoldier.getChildren().addAll(lblHead, soldierImg);
-        return vbSoldier;
+        lblHead.setFont(Font.font("Ink Free",FontWeight.BOLD,12));
+        AnchorPane anchorSoldier = new AnchorPane();
+        anchorSoldier.setLayoutX(xpos);
+        anchorSoldier.setLayoutY(ypos);
+        anchorSoldier.getChildren().addAll(lblHead, soldierImg);
+        return anchorSoldier;
     }
 
     public void updateCircle() {
         for (int i = 0; i < deathCircle.size(); i++) {
             double angle = (((double) i) / deathCircle.size()) * 2 * Math.PI;
             double xpos = radio * Math.cos(angle) + 300;
-            double ypos = radio * Math.sin(angle) + 240;
+            double ypos = radio * Math.sin(angle) + 260;
+            double lblxpos = radioLbl * Math.cos(angle)+15 ;
+            double lblypos = radioLbl * Math.sin(angle)+20 ;
             circleSpace.getChildren().get(i).setLayoutX(xpos);
             circleSpace.getChildren().get(i).setLayoutY(ypos);
+            
+            AnchorPane plx = (AnchorPane) circleSpace.getChildren().get(i);
+            plx.getChildren().get(0).setLayoutX(lblxpos);
+            plx.getChildren().get(0).setLayoutY(lblypos);
         }
     }
 

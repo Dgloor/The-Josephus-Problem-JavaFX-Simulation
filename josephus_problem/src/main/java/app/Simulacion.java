@@ -1,7 +1,5 @@
 package app;
 
-import java.io.File;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,16 +18,18 @@ public class Simulacion {
     @FXML
     AnchorPane circleSpace;
     private final int radio = 230;
-    Image img;
+    private final Image img;
     private final CircularDoublyLinkedList<Soldier> deathCircle;
-    public final int defaultSize = 20;
-    public SimulationState state;
+    private final int defaultSize = 20;
+
+    private Matanza matanza;
+
     public static int last;
 
     public Simulacion(AnchorPane circleSpace) {
         this.circleSpace = circleSpace;
-        deathCircle = new CircularDoublyLinkedList();
-        state = SimulationState.STOPPED;
+        this.deathCircle = new CircularDoublyLinkedList();
+
         img = new Image(App.class.getResourceAsStream("/images/soldado.png"), 50, 50, true, true);
         for (int i = 0; i < defaultSize; i++) {
             addSoldier();
@@ -71,21 +71,20 @@ public class Simulacion {
     }
 
     public void startSimulation() {
-        this.state = SimulationState.RUNNING;
-        Thread matanza = new Thread(new Matanza(last, true, deathCircle));
+        matanza = new Matanza(last, true, deathCircle);
         matanza.start();
     }
 
     public void pauseSimulation() {
-        this.state = SimulationState.PAUSED;
+        matanza.pause();
     }
 
     public void stopSimulation() {
-        this.state = SimulationState.STOPPED;
-        int size = deathCircle.size();
-        updateSoldiersAmount(0);
-        updateSoldiersAmount(size);
-        last = 1;
+        matanza.stop();
+    }
+
+    public void revivir() {
+
     }
 
     public void updateSoldiersAmount(Integer n) {
@@ -97,6 +96,5 @@ public class Simulacion {
                 removeSoldier();
             }
         }
-
     }
 }

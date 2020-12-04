@@ -9,7 +9,7 @@ package app;
  *
  * @author danny
  */
-public enum SimulationState {
+public enum State {
     RUNNING,
     PAUSED,
     STOPPED

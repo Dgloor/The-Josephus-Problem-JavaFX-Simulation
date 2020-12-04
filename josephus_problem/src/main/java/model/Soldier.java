@@ -5,18 +5,18 @@ package model;
  * @author danny
  */
 public class Soldier {
-    private boolean alive;
+    private boolean isAlive;
     
     public Soldier(){
-        alive = true;
+        isAlive = true;
     }
 
     public boolean isAlive() {
-        return alive;
+        return isAlive;
     }
 
     public void die() {
-        alive = false;
+        isAlive = false;
     }
     
     public void kill(Soldier s){

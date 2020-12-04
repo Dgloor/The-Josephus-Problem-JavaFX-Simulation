@@ -8,7 +8,6 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.shape.Circle;
 
 /**
  *
@@ -23,7 +22,7 @@ public class Controles {
     @FXML
     private Spinner<Integer> startIndex;
     @FXML
-    private  SpinnerValueFactory<Integer> valueFactory;
+    private SpinnerValueFactory<Integer> valueFactory;
     @FXML
     private Button btnStart, btnPause, btnStop, btnReset;
 

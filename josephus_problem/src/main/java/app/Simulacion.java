@@ -30,7 +30,7 @@ public class Simulacion {
         this.circleSpace = circleSpace;
         this.deathCircle = new CircularDoublyLinkedList();
 
-        img = new Image(App.class.getResourceAsStream("/images/soldado.png"), 50, 50, true, true);
+        img = new Image(App.class.getResourceAsStream("/images/ninja.png"), 50, 50, true, true);
         for (int i = 0; i < defaultSize; i++) {
             addSoldier();
         }

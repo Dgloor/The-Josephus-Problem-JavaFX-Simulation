@@ -47,38 +47,40 @@ public class Matanza implements Runnable{
         for (int i = 0; i < startIndex; i++){
             li.next();
         }
-        if (horario){
-            while(baseController.simulacion.state == SimulationState.RUNNING && !lastAlive()){
+        while(baseController.simulacion.state == SimulationState.RUNNING && !lastAlive()){
+            if (horario){
+                Soldier s = li.next();
+                Simulacion.last+=1;
+                while (!s.isAlive()){
+                    s = li.next();
+                    Simulacion.last+=1;
+                }
+                Soldier v = li.next();
+                Simulacion.last+=1;
+                while (!v.isAlive()){
+                    v = li.next();
+                    Simulacion.last+=1;
+                }
+                s.kill(v);
+                Platform.runLater(()-> updateBodies());
                 try {
-                    Soldier s = li.next();
-                    while (!s.isAlive()){
-                        s = li.next();
-                    }
-                    Soldier v = li.next();
-                    while (!v.isAlive()){
-                        v = li.next();
-                    }
-                    s.kill(v);
-                    Platform.runLater(()-> updateBodies());
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     System.out.println(ex.getMessage());
                 }
             }
-        }
-        else {
-            while(baseController.simulacion.state == SimulationState.RUNNING && !lastAlive()){
+            else {
+                Soldier s = li.previous();
+                while (!s.isAlive()){
+                    s = li.previous();
+                }
+                Soldier v = li.previous();
+                while (!v.isAlive()){
+                    v = li.previous();
+                }
+                s.kill(v);
+                Platform.runLater(()-> updateBodies());
                 try {
-                    Soldier s = li.previous();
-                    while (!s.isAlive()){
-                        s = li.previous();
-                    }
-                    Soldier v = li.previous();
-                    while (!v.isAlive()){
-                        v = li.previous();
-                    }
-                    s.kill(v);
-                    Platform.runLater(()-> updateBodies());
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     System.out.println(ex.getMessage());

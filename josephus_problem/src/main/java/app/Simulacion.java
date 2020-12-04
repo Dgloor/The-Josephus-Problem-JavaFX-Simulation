@@ -24,6 +24,7 @@ public class Simulacion {
     private final CircularDoublyLinkedList<Soldier> deathCircle;
     public final int defaultSize = 20;
     public SimulationState state;
+    public static int last;
 
     public Simulacion(AnchorPane circleSpace) {
         this.circleSpace = circleSpace;
@@ -33,6 +34,7 @@ public class Simulacion {
         for (int i = 0; i < defaultSize; i++) {
             addSoldier();
         }
+        last = 1;
     }
 
     public VBox makeBox(Image img, double xpos, double ypos) {
@@ -70,7 +72,7 @@ public class Simulacion {
 
     public void startSimulation() {
         this.state = SimulationState.RUNNING;
-        Thread matanza = new Thread(new Matanza(1, true, deathCircle));
+        Thread matanza = new Thread(new Matanza(last, true, deathCircle));
         matanza.start();
     }
 
@@ -80,6 +82,10 @@ public class Simulacion {
 
     public void stopSimulation() {
         this.state = SimulationState.STOPPED;
+        int size = deathCircle.size();
+        updateSoldiersAmount(0);
+        updateSoldiersAmount(size);
+        last = 1;
     }
 
     public void updateSoldiersAmount(Integer n) {

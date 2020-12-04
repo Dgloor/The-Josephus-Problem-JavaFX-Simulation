@@ -15,11 +15,11 @@ public class Soldier {
         return isAlive;
     }
 
-    public void die() {
-        isAlive = false;
+    public void revive() {
+        isAlive = true;
     }
     
     public void kill(Soldier s){
-        s.die();
+        s.isAlive = false;
     }
 }

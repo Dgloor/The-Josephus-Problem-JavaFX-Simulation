@@ -28,7 +28,7 @@ public class Simulacion {
 
     private Matanza matanza;
 
-    public static int last;
+    private final int start;
 
     public Simulacion(AnchorPane circleSpace) {
         this.circleSpace = circleSpace;
@@ -38,7 +38,7 @@ public class Simulacion {
         for (int i = 0; i < defaultSize; i++) {
             addSoldier();
         }
-        last = 1;
+        start = 1;
     }
 
     public AnchorPane makeBox(Image img, double xpos, double ypos) {
@@ -82,7 +82,8 @@ public class Simulacion {
     }
 
     public void startSimulation() {
-        matanza = new Matanza(last, true, deathCircle);
+        if (matanza == null)
+            matanza = new Matanza(start, true, deathCircle);
         matanza.start();
     }
 

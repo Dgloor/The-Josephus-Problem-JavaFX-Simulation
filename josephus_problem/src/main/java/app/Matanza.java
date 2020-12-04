@@ -13,7 +13,7 @@ public class Matanza implements Runnable {
     private final boolean horario;
     private final CircularDoublyLinkedList<Soldier> deathCircle;
     private final ObservableList<Node> imgs = baseController.simulacion.circleSpace.getChildren();
-
+    private Thread t;
     private State state;
 
     public Matanza(int startIndex, boolean horario, CircularDoublyLinkedList<Soldier> deathCircle) {
@@ -47,8 +47,13 @@ public class Matanza implements Runnable {
 
     public void start() {
         this.state = State.RUNNING;
-        Thread t = new Thread(this);
-        t.start();
+        if (t==null){
+            t = new Thread(this);        
+            t.start();
+        }
+        else {
+            t.resume();
+        }
     }
 
     @Override
@@ -60,16 +65,12 @@ public class Matanza implements Runnable {
         while (this.state == State.RUNNING && !lastAlive()) {
             if (horario) {
                 Soldier s = li.next();
-                Simulacion.last += 1;
                 while (!s.isAlive()) {
                     s = li.next();
-                    Simulacion.last += 1;
                 }
                 Soldier v = li.next();
-                Simulacion.last += 1;
                 while (!v.isAlive()) {
                     v = li.next();
-                    Simulacion.last += 1;
                 }
                 s.kill(v);
                 Platform.runLater(() -> updateBodies());
@@ -96,14 +97,27 @@ public class Matanza implements Runnable {
                 }
             }
         }
+        baseController.controles.stop();
     }
 
     public void pause() {
         this.state = State.PAUSED;
+        try {
+            t.suspend();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void stop() {
         this.state = State.STOPPED;
+        for (int i = 0; i<deathCircle.size(); i++){
+            if (!deathCircle.get(i).isAlive()){
+                imgs.get(i).setOpacity(1);
+                deathCircle.get(i).revive();
+            }
+        }
+        t = null;
     }
 
 }

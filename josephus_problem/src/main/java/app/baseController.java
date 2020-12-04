@@ -16,7 +16,7 @@ import javafx.scene.shape.Circle;
 public class baseController implements Initializable {
     Ventana ventana;
     Audio audio;
-    Controles controles;
+    static Controles controles;
     static Simulacion simulacion;
     
     @FXML

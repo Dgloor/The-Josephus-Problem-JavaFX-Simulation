@@ -91,6 +91,11 @@ public class baseController implements Initializable {
     }
 
     @FXML
+    public void changeStart() {
+        controles.updateStartIndex();
+    }
+
+    @FXML
     public void toggleAudioState() {
         audio.switchState();
     }

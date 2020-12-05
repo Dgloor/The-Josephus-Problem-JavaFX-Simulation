@@ -89,17 +89,18 @@ public class Controles {
         btnStop.setDisable(true);
 
         amountSlider.setValue(observer.defaultSize);
-        
+
         rbHorario.setSelected(true);
         rbAntihorario.setSelected(false);
     }
 
     public void updateAmount() {
         observer.updateSoldiersAmount((int) amountSlider.getValue());
+        setSpinnerLimits(1, (int) amountSlider.getValue());
     }
 
     public void updateStartIndex() {
-
+        observer.getMatanza().setStartIndex(startIndex.getValue());
     }
 
     public void updateHorario() {
@@ -130,9 +131,18 @@ public class Controles {
 
     public void setStartIndex(Spinner<Integer> startIndex) {
         this.startIndex = startIndex;
+        setSpinnerLimits(1, observer.defaultSize);
+    }
+
+    public void setSpinnerLimits(int start, int end) {
+        int currentValue = 1;
+        if (this.startIndex.getValue() != null) {
+            currentValue = this.startIndex.getValue();
+        }
         valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                1, observer.defaultSize);
+                start, end);
         this.startIndex.setValueFactory(valueFactory);
+        this.startIndex.getValueFactory().setValue(currentValue);
     }
 
     public void setBtnStart(Button btnStart) {

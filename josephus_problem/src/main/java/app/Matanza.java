@@ -4,6 +4,10 @@ import java.util.ListIterator;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
+import javafx.scene.paint.Color;
 import list.CircularDoublyLinkedList;
 import model.Soldier;
 
@@ -45,14 +49,21 @@ public class Matanza implements Runnable {
         }
     }
 
-    public void start() {
-        this.state = State.RUNNING;
-        if (t==null){
-            t = new Thread(this);        
-            t.start();
-        }
-        else {
-            t.resume();
+    private void asesino(Soldier s, boolean efecto){
+        for (int i=0; i<deathCircle.size(); i++){
+            if (s == deathCircle.get(i)){
+                Light l = new Light.Distant();
+                l.setColor(Color.RED);
+                Lighting li = new Lighting();
+                li.setLight(l);
+                ColorAdjust ca = new ColorAdjust(0, 0, .25, 0.25);
+                ca.setInput(li);
+                if (efecto) {
+                    imgs.get(i).setEffect(ca);
+                } else {
+                    imgs.get(i).setEffect(null);
+                }
+            }
         }
     }
 
@@ -72,10 +83,14 @@ public class Matanza implements Runnable {
                 while (!v.isAlive()) {
                     v = li.next();
                 }
-                s.kill(v);
-                Platform.runLater(() -> updateBodies());
+                Soldier aux = s;
+                Platform.runLater(() -> asesino(aux, true));
                 try {
+                    Thread.sleep(250);
+                    s.kill(v);
+                    Platform.runLater(() -> updateBodies());
                     Thread.sleep(1000);
+                    Platform.runLater(() -> asesino(aux, false));
                 } catch (InterruptedException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -88,10 +103,14 @@ public class Matanza implements Runnable {
                 while (!v.isAlive()) {
                     v = li.previous();
                 }
-                s.kill(v);
-                Platform.runLater(() -> updateBodies());
+                Soldier aux = s;
+                Platform.runLater(() -> asesino(aux, true));
                 try {
+                    Thread.sleep(250);
+                    s.kill(v);
+                    Platform.runLater(() -> updateBodies());
                     Thread.sleep(1000);
+                    Platform.runLater(() -> asesino(aux, false));
                 } catch (InterruptedException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -100,6 +119,17 @@ public class Matanza implements Runnable {
         baseController.controles.stop();
     }
 
+    public void start() {
+        this.state = State.RUNNING;
+        if (t==null){
+            t = new Thread(this);        
+            t.start();
+        }
+        else {
+            t.resume();
+        }
+    }
+    
     public void pause() {
         this.state = State.PAUSED;
         try {
@@ -116,8 +146,10 @@ public class Matanza implements Runnable {
                 imgs.get(i).setOpacity(1);
                 deathCircle.get(i).revive();
             }
+            else {
+                imgs.get(i).setEffect(null);
+            }
         }
         t = null;
     }
-
 }

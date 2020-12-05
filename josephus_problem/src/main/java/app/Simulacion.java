@@ -24,7 +24,7 @@ public class Simulacion {
     private Image img;
     public final CircularDoublyLinkedList<Soldier> deathCircle;
 
-    private Matanza matanza;
+    private final Matanza matanza;
 
     public Simulacion(AnchorPane circleSpace) {
         this.circleSpace = circleSpace;

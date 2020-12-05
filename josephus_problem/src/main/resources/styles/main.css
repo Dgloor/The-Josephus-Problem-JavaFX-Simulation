@@ -1,25 +1,6 @@
-{
-    -primary: #191A1B;
-    -green1: #61892F;
-    -green2: #86C232;
-    -white: #E7EAE0;
-    -gray1: #474B4F;
-    -gray2: #6B6E70;
-}
-
-
-
 .bar {
     -fx-background-color: #474B4F;
 }
-
-/*.botones {
-    -fx-background-color: #61892F;
-}
-
-.botones:hover {
-    -fx-background-color: #86C232;
-}*/
 
 #btnClose:hover {
     -fx-fill: #ee003b;
@@ -28,9 +9,3 @@
 #btnMinimize:hover{
     -fx-fill: #ffa202;
 }
-
-/*.jfx-button {
-    -jfx-button-type: RAISED;
-    -fx-background-color: #61892F;
-    -fx-text-fill: white;
-}*/

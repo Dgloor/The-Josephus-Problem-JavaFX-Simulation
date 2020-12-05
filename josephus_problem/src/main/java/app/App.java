@@ -22,7 +22,6 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        System.out.println("Iniciando Aplicación...");
         scene = new Scene(loadFXML("base"));
         stage.centerOnScreen();
         stage.setScene(scene);
@@ -34,11 +33,6 @@ public class App extends Application {
     public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
-    }
-
-    @Override
-    public void stop() {
-        System.out.println("Programa Finalizado.");
     }
 
     public static void main(String[] args) {

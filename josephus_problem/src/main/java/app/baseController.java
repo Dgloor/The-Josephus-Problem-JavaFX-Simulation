@@ -1,5 +1,6 @@
 package app;
 
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,11 +15,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 
 public class baseController implements Initializable {
+
     Ventana ventana;
     Audio audio;
     static Controles controles;
     static Simulacion simulacion;
-    
+
     @FXML
     BorderPane baseScreen;
     @FXML
@@ -27,13 +29,15 @@ public class baseController implements Initializable {
     Button btnStart, btnPause, btnStop, btnReset, btnMusic;
     @FXML
     AnchorPane circleSpace;
-    @FXML
-    ToggleGroup toggleSentido;
 
     @FXML
     JFXSlider amountSlider;
     @FXML
     Spinner<Integer> startIndex;
+    @FXML
+    JFXRadioButton rbHorario;
+    @FXML
+    JFXRadioButton rbAntihorario;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -47,12 +51,48 @@ public class baseController implements Initializable {
         controles = new Controles();
         controles.setObserver(simulacion);
         controles.setAmountSlider(amountSlider);
-        controles.setToggleSentido(toggleSentido);
+        controles.setRbHorario(rbHorario);
+        controles.setRbAntihorario(rbAntihorario);
         controles.setStartIndex(startIndex);
         controles.setBtnStart(btnStart);
         controles.setBtnPause(btnPause);
         controles.setBtnStop(btnStop);
         controles.setBtnReset(btnReset);
+    }
+
+    @FXML
+    public void startSimulation() {
+        controles.start();
+    }
+
+    @FXML
+    public void pauseSimulation() {
+        controles.pause();
+    }
+
+    @FXML
+    public void stopSimulation() {
+        controles.stop();
+    }
+
+    @FXML
+    public void resetSettings() {
+        controles.reset();
+    }
+
+    @FXML
+    public void goHorario() {
+        controles.updateHorario();
+    }
+
+    @FXML
+    public void goAntihorario() {
+        controles.updateAntihorario();
+    }
+
+    @FXML
+    public void toggleAudioState() {
+        audio.switchState();
     }
 
     @FXML
@@ -75,28 +115,4 @@ public class baseController implements Initializable {
         ventana.close();
     }
 
-    @FXML
-    public void toggleAudioState() {
-        audio.switchState();
-    }
-
-    @FXML
-    public void startSimulation() {
-        controles.start();
-    }
-    
-    @FXML
-    public void pauseSimulation() {
-        controles.pause();
-    }
-
-    @FXML
-    public void stopSimulation() {
-        controles.stop();
-    }
-
-    @FXML
-    public void resetSettings() {
-        controles.reset();
-    }
 }

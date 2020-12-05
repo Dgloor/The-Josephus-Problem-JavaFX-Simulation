@@ -4,23 +4,33 @@ import java.util.ListIterator;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import list.CircularDoublyLinkedList;
 import model.Soldier;
 
 public class Matanza implements Runnable {
 
-    private final int startIndex;
-    private final boolean horario;
     private final CircularDoublyLinkedList<Soldier> deathCircle;
-    private final ObservableList<Node> imgs = baseController.simulacion.circleSpace.getChildren();
+    private final ObservableList<Node> imgs;
+
     private Thread t;
     private State state;
+    private int startIndex = 1;
+    private boolean horario = true;
 
-    public Matanza(int startIndex, boolean horario, CircularDoublyLinkedList<Soldier> deathCircle) {
-        this.startIndex = startIndex - 1;
-        this.horario = horario;
+    public Matanza(CircularDoublyLinkedList<Soldier> deathCircle, AnchorPane circleSpace) {
         this.deathCircle = deathCircle;
+        this.imgs = circleSpace.getChildren();
         this.state = State.STOPPED;
+
+    }
+
+    public void setStartIndex(int startIndex) {
+        this.startIndex = startIndex - 1;
+    }
+
+    public void setHorario(boolean horario) {
+        this.horario = horario;
     }
 
     private boolean lastAlive() {
@@ -47,11 +57,10 @@ public class Matanza implements Runnable {
 
     public void start() {
         this.state = State.RUNNING;
-        if (t==null){
-            t = new Thread(this);        
+        if (t == null) {
+            t = new Thread(this);
             t.start();
-        }
-        else {
+        } else {
             t.resume();
         }
     }
@@ -97,7 +106,7 @@ public class Matanza implements Runnable {
                 }
             }
         }
-        baseController.controles.stop();
+//        baseController.controles.stop();
     }
 
     public void pause() {
@@ -111,8 +120,8 @@ public class Matanza implements Runnable {
 
     public void stop() {
         this.state = State.STOPPED;
-        for (int i = 0; i<deathCircle.size(); i++){
-            if (!deathCircle.get(i).isAlive()){
+        for (int i = 0; i < deathCircle.size(); i++) {
+            if (!deathCircle.get(i).isAlive()) {
                 imgs.get(i).setOpacity(1);
                 deathCircle.get(i).revive();
             }

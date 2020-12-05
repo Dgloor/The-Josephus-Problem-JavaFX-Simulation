@@ -1,13 +1,12 @@
 package app;
 
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 
 /**
  *
@@ -16,7 +15,7 @@ import javafx.scene.control.ToggleGroup;
 public class Controles {
 
     @FXML
-    private ToggleGroup toggleSentido;
+    private JFXRadioButton rbHorario, rbAntihorario;
     @FXML
     private JFXSlider amountSlider;
     @FXML
@@ -27,8 +26,6 @@ public class Controles {
     private Button btnStart, btnPause, btnStop, btnReset;
 
     Simulacion observer;
-
-    final Integer defaultSliderAmount = 20;
 
     public void start() {
         observer.startSimulation();
@@ -44,11 +41,9 @@ public class Controles {
 
         startIndex.setDisable(true);
         amountSlider.setDisable(true);
-        toggleSentido.getToggles().stream().map((t)
-                -> (ToggleButton) t).forEach((btn)
-                -> {
-            btn.setDisable(true);
-        });
+
+        rbHorario.setDisable(true);
+        rbAntihorario.setDisable(true);
     }
 
     public void pause() {
@@ -78,11 +73,8 @@ public class Controles {
         startIndex.setDisable(false);
         amountSlider.setDisable(false);
 
-        toggleSentido.getToggles().stream().map((t)
-                -> (ToggleButton) t).forEach((btn)
-                -> {
-            btn.setDisable(false);
-        });
+        rbHorario.setDisable(false);
+        rbAntihorario.setDisable(false);
     }
 
     public void reset() {
@@ -96,9 +88,10 @@ public class Controles {
 
         btnStop.setDisable(true);
 
-        amountSlider.setValue(defaultSliderAmount);
-        toggleSentido.getToggles().get(0).setSelected(true);
-        toggleSentido.getToggles().get(1).setSelected(false);
+        amountSlider.setValue(observer.defaultSize);
+        
+        rbHorario.setSelected(true);
+        rbAntihorario.setSelected(false);
     }
 
     public void updateAmount() {
@@ -106,14 +99,23 @@ public class Controles {
     }
 
     public void updateStartIndex() {
-    }
-
-    public void updateSentido() {
 
     }
 
-    public void setToggleSentido(ToggleGroup toggleSentido) {
-        this.toggleSentido = toggleSentido;
+    public void updateHorario() {
+        observer.getMatanza().setHorario(true);
+    }
+
+    public void updateAntihorario() {
+        observer.getMatanza().setHorario(false);
+    }
+
+    public void setRbHorario(JFXRadioButton rbHorario) {
+        this.rbHorario = rbHorario;
+    }
+
+    public void setRbAntihorario(JFXRadioButton rbAntihorario) {
+        this.rbAntihorario = rbAntihorario;
     }
 
     public void setAmountSlider(JFXSlider amountSlider) {
@@ -129,7 +131,7 @@ public class Controles {
     public void setStartIndex(Spinner<Integer> startIndex) {
         this.startIndex = startIndex;
         valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                1, defaultSliderAmount);
+                1, observer.defaultSize);
         this.startIndex.setValueFactory(valueFactory);
     }
 

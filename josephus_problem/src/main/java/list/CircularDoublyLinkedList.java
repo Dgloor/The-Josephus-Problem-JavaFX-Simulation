@@ -87,10 +87,9 @@ public class CircularDoublyLinkedList<T> implements List<T> {
 
     @Override
     public void add(int index, T data) {
-        if (index == 0){
+        if (index == 0) {
             addFirst(data);
-        }
-        else if (index > 0 && index < size){
+        } else if (index > 0 && index < size) {
             Node<T> aux = getNode(index);
             Node<T> newNode = new Node<>(data);
             aux.getPrevious().setNext(newNode);
@@ -104,10 +103,9 @@ public class CircularDoublyLinkedList<T> implements List<T> {
     @Override
     public T remove(int index) {
         T element = null;
-        if (index == 0){
+        if (index == 0) {
             element = removeFirst();
-        }
-        else if (index > 0 && index < size){
+        } else if (index > 0 && index < size) {
             Node<T> aux = getNode(index);
             element = aux.getContent();
             aux.getPrevious().setNext(aux.getNext());
@@ -123,7 +121,7 @@ public class CircularDoublyLinkedList<T> implements List<T> {
     @Override
     public T get(int index) {
         T element = null;
-        if (index >= 0 && index < size){
+        if (index >= 0 && index < size) {
             Node<T> aux = getNode(index);
             element = aux.getContent();
         }
@@ -133,7 +131,7 @@ public class CircularDoublyLinkedList<T> implements List<T> {
     @Override
     public T set(int index, T data) {
         T element = null;
-        if (index >= 0 && index < size){
+        if (index >= 0 && index < size) {
             Node<T> aux = getNode(index);
             element = aux.getContent();
             aux.setContent(data);
@@ -141,27 +139,26 @@ public class CircularDoublyLinkedList<T> implements List<T> {
         return element;
     }
 
-    private Node<T> getNode(int index){
+    private Node<T> getNode(int index) {
         Node<T> aux = head;
-        if (index<=size/2){
-            for(; index > 0; index--){
+        if (index <= size / 2) {
+            for (; index > 0; index--) {
                 aux = aux.getNext();
             }
-        }
-        else if (index>size/2){
+        } else if (index > size / 2) {
             index = size - index;
-            for(; index > 0; index--){
+            for (; index > 0; index--) {
                 aux = aux.getPrevious();
             }
         }
         return aux;
     }
-    
+
     @Override
     public ListIterator<T> listIterator() {
-        ListIterator<T> it = new ListIterator<>(){
+        ListIterator<T> it = new ListIterator<>() {
             private Node<T> traveler = head;
-            
+
             @Override
             public boolean hasNext() {
                 return size > 0;
@@ -186,45 +183,47 @@ public class CircularDoublyLinkedList<T> implements List<T> {
 
             @Override
             public int nextIndex() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
             public int previousIndex() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
             public void remove() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
             public void set(T e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
+
             public void add(T e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
-            
+
         };
         return it;
     }
 
     @Override
+
     public String toString() {
         String text = "[";
-        int counter= 0;
-        for (Node<T> node = head; counter<size; counter++){
-            text+= node.getContent().toString();
-            if(counter != size-1){
-                text+=", ";
+        int counter = 0;
+        for (Node<T> node = head; counter < size; counter++) {
+            text += node.getContent().toString();
+            if (counter != size - 1) {
+                text += ", ";
             }
             node = node.getNext();
         }
-        return text+"]";
+        return text + "]";
     }
 
 }

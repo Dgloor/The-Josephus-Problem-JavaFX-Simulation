@@ -97,6 +97,7 @@ public class Controles {
     public void updateAmount() {
         observer.updateSoldiersAmount((int) amountSlider.getValue());
         setSpinnerLimits(1, (int) amountSlider.getValue());
+        updateStartIndex();
     }
 
     public void updateStartIndex() {

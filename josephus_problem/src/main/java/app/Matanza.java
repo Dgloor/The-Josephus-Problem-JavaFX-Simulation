@@ -19,7 +19,7 @@ public class Matanza implements Runnable {
 
     private Thread t;
     private State state;
-    private int startIndex = 1;
+    private int startIndex = 0;
     private boolean horario = true;
 
     public Matanza(CircularDoublyLinkedList<Soldier> deathCircle, AnchorPane circleSpace) {
@@ -63,7 +63,7 @@ public class Matanza implements Runnable {
         for (int i = 0; i < deathCircle.size(); i++) {
             if (s == deathCircle.get(i)) {
                 Light l = new Light.Distant();
-                l.setColor(Color.RED);
+                l.setColor(Color.GRAY);
                 Lighting li = new Lighting();
                 li.setLight(l);
                 ColorAdjust ca = new ColorAdjust(0, 0, .25, 0.25);
@@ -96,7 +96,7 @@ public class Matanza implements Runnable {
                 Soldier aux = s;
                 Platform.runLater(() -> destacarAsesino(aux, true));
                 try {
-                    Thread.sleep(250);
+                    Thread.sleep(750);
                     s.kill(v);
                     Platform.runLater(() -> updateBodies());
                     Thread.sleep(1000);
@@ -116,7 +116,7 @@ public class Matanza implements Runnable {
                 Soldier aux = s;
                 Platform.runLater(() -> destacarAsesino(aux, true));
                 try {
-                    Thread.sleep(250);
+                    Thread.sleep(750);
                     s.kill(v);
                     Platform.runLater(() -> updateBodies());
                     Thread.sleep(1000);
@@ -125,6 +125,10 @@ public class Matanza implements Runnable {
                     System.out.println(ex.getMessage());
                 }
             }
+        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
         }
         baseController.controles.stop();
     }

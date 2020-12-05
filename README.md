@@ -1,5 +1,5 @@
 # The Josephus Problem JavaFX Simulation
-![https://raw.githubusercontent.com/Dgloor/The-Josephus-Problem-JavaFX-Simulation/main/cap.png?token=ANOXSKSH6D5OLCQDE7BOFNC7ZMLCG]
+![cap](https://raw.githubusercontent.com/Dgloor/The-Josephus-Problem-JavaFX-Simulation/main/cap.png?token=ANOXSKSH6D5OLCQDE7BOFNC7ZMLCG)
 
 ## Description
 Josefo, que no era partidario de la inmolación, encontró una solución imaginativa. Propuso a sus compañeros que debían formar un círculo y matarse entre ellos siguiendo un ritual matemático: el primero mataría al segundo y pasaría la espada al tercero, el cual acabaría con el cuarto, pasaría la espada al quinto y así sucesivamente. De esta forma el azar elegiría al judío que no tendría más remedio que suicidarse. Evidentemente, con este juego matemático Flavio Josefo esperaba poder salir con vida de la cueva.

@@ -9,3 +9,7 @@ Josefo, que no era partidario de la inmolación, encontró una solución imagina
 
 ## Explanatory Video
 https://youtu.be/aACb6CL1BWI
+
+
+## Sound Effect Credits
+[Edu Loor](https://www.linkedin.com/in/edu-loor-154831187)
